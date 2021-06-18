@@ -11,8 +11,8 @@ var readState, changeState;
 function preload()
 {
 	//load images here
-  dogImage = loadImage("images/Dog.png");
-  happyDogImage = loadImage("images/happy dog.png");
+  dogImage = loadImage("images/happy dog.png");
+  happyDogImage = loadImage("images/Happy.png");
   bedroomImage = loadImage("images/Bed Room.png");
   gardenImage = loadImage("images/Garden.png");
   washroomImage = loadImage("images/Wash Room.png");
@@ -35,7 +35,7 @@ function setup() {
   readState=database.ref('gameState');
   readState.on("value",function(data){
       gameState = data.val();
-  })
+  });
 
   dog = createSprite(700, 400, 150, 150);
 
@@ -69,7 +69,7 @@ function draw() {
     foodObject.washroom();
   }
   else{
-    update("Hungry");
+    updateState("Hungry");
     foodObject.display();
   }
 
@@ -114,10 +114,10 @@ function addFood(){
   });
 }
 
-function updateState(){
+function updateState(state){
   database.ref('/').update({
     gameState : state
-  })
+  });
 }
 
 function feedDog(){
